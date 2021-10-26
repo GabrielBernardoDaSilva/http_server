@@ -1,0 +1,21 @@
+#[allow(dead_code)]
+#[allow(unused_variables)]
+#[allow(unused_imports)]
+
+
+mod http;
+mod server;
+
+use server::Server;
+use http::Request;
+use http::Method;
+
+
+
+    
+
+
+fn main() {
+    let server = Server::new("127.0.0.1:8080".to_string());
+    server.run();
+}
