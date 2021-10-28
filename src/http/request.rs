@@ -16,9 +16,16 @@ pub struct Request<'buf> {
     method: Method,
 }
 
-impl<'buf> Request<'buf> {
-    fn from_byte_array(buf: &[u8]) -> Self {
-        unimplemented!()
+impl<'buf>  Request<'buf>  {
+    pub fn path(&self) -> &str{
+        &self.path
+    }
+    pub fn method(&self) -> &Method{
+        &self.method
+    }
+
+    pub fn query_string(&self) -> Option<&QueryString>{
+        self.query_string.as_ref()
     }
 }
 
@@ -64,7 +71,7 @@ impl From<Utf8Error> for ParseError {
 
 fn get_next_word(request: &str) -> Option<(&str, &str)> {
     for (i, c) in request.chars().enumerate() {
-        if c == ' ' || c == 'r' {
+        if c == ' ' || c == '\r' {
             return Some((&request[..i], &request[i + 1..]));
         }
     }
